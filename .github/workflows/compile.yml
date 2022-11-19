@@ -1,0 +1,22 @@
+name: Compile
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install FPC
+      run: |
+        export DEBIAN_FRONTEND=noninteractive
+        sudo apt-get update
+        sudo apt-get install -y fpc
+    - name: Compile
+      uses: suve/GHActions-FPC@v0.4.0
+      with:
+        source: main.pas
