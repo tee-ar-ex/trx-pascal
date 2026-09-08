@@ -22,14 +22,14 @@ jobs:
         run: |
           pip install sphinx myst-parser pydata-sphinx-theme sphinx-design
       - name: Build docs
-        run: sphinx-build -b html docs/ docs/_build
+        run: sphinx-build -b html docs/source docs/build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           name: ${{ github.event_name == 'pull_request'
             && format('github-pages-preview-{0}', github.event.number)
             || 'github-pages' }}
-          path: docs/_build/
+          path: docs/build/
 
   deploy:
     if: github.event_name != 'pull_request'
